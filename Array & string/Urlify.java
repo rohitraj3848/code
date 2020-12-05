@@ -1,4 +1,4 @@
-import java.io.*;
+
 import java.util.*;
 public class Urlify{
 	public static void main(String args[]){
@@ -8,7 +8,8 @@ public class Urlify{
        System.out.println("Input the true length of string:");
        int truelength=scan.nextInt();
        String r=solution(str,truelength);
-       System.out.println(r);
+	   System.out.println(r);
+	   scan.close();
 	}
 	public static String solution(String s,int truelength){
 		char s1[]=new char[s.length()];

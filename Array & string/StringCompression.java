@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 
 public class StringCompression{
@@ -8,13 +7,13 @@ public class StringCompression{
 		String str=scan.nextLine();
 		String r=Solution(str);
 		System.out.println(r);
+		scan.close();
 	}
 	public static String Solution(String s){
        String copy=s;
        String r="";
        r+=copy.charAt(0);
        char temp=copy.charAt(0);
-       int index=0;
        int count=1;
        for(int i=1;i<copy.length();i++){
        	if(copy.charAt(i)==temp){

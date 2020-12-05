@@ -1,7 +1,4 @@
-import java.io.*;
 import java.util.*;
-
-
 public class isUnique{
 	public static void main(String args[]){
 		Scanner scan=new Scanner(System.in);
@@ -9,6 +6,7 @@ public class isUnique{
 		String s=scan.nextLine();
 		boolean t=Solution(s);
 		System.out.println(t);
+		scan.close();
 	}
 	public static boolean Solution(String s){
 		if(s.length()>26){

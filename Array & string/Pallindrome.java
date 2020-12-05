@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 public class Pallindrome{
 	public static void main(String args[]){
@@ -7,6 +6,7 @@ public class Pallindrome{
 		String str=scan.nextLine();
 		boolean b=solution(str);
 		System.out.println(b);
+		scan.close();
 	}
 	public static boolean solution(String s){
 		char[] c=s.toCharArray();
