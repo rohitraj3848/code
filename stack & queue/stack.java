@@ -15,20 +15,15 @@ public class stack{
           int item=top.data;
           top=top.next;
           return item;
-
 	}
 
 	public void push(int data){
 		stackNode s=new stackNode(data);
 		s.next=top;
 		top=s;
-
 	}
-
 	public int peek(){
         if(top==null)throw new EmptyStackException();
         return top.data;
-	}
-
-	
+	}	
 }

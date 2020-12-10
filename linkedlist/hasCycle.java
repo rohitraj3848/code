@@ -11,7 +11,7 @@ public class hasCycle{
         ListNode r=detectCycle2(head);
         System.out.println(r.data);
     }
-    //to return whether there is or not cycle
+    //to return whether there is cycle or not
     static  boolean detectCycle(ListNode head){
         if(head==null){
             return false;
