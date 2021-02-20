@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class checkpermutation {
     public static void main(String[] args) {
         System.out.println(check("dog","god"));

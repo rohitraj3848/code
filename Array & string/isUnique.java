@@ -29,7 +29,7 @@ public class isUnique{
             	b[(val+32)%97]=true;
             }else{
             b[val%97]=true;
-        }
+            }
 		}
 		return true;
 	}

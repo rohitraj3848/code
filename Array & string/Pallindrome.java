@@ -12,7 +12,9 @@ public class Pallindrome{
 		char[] c=s.toCharArray();
 		HashMap<Character,Integer> h=new HashMap<>();
 		for(int i=0;i<c.length;i++){
-			h.put(c[i],0);
+			if(!h.containsKey(c[i])){
+				h.put(c[i],0);
+			}	
 		}
         for(int i=0;i<c.length;i++){
         	int t=h.get(c[i]);

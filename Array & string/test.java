@@ -1,12 +1,7 @@
 public class test {
     public static void main(String[] args) {
-        int val1='a';
-        int r1=val1%97;
-        int val='A';
-        int r=(val+32)%97;
-        System.out.println(val);
-        System.out.println(r);
-        System.out.println(val1);
-        System.out.println(r1);
+        for(int i=0,j=0;i<5;++i,j++){
+            System.out.println(i+j);
+        }
     }
 }

@@ -14,12 +14,12 @@ public class allPaths {
     }
     static void find(int[][] mat,Stack<Integer> path,int i,int j,int M,int N){
         if(i==M-1 && j==N-1){
-            path.add(mat[i][j]);
+            path.push(mat[i][j]);
             System.out.println(path);
             path.pop();
             return;
         }
-        path.add(mat[i][j]);
+        path.push(mat[i][j]);
         if(j+1<N){
             find(mat, path, i, j+1,M,N);
         }
@@ -29,5 +29,6 @@ public class allPaths {
         path.pop();
 
     }
+
 
 }
