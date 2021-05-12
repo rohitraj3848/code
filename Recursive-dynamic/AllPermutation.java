@@ -2,7 +2,8 @@ import java.util.*;
 public class AllPermutation {
    public static void main(String[] args) {
        String s="abcd";
-      // ArrayList<String> res=getperm(s);
+       ArrayList<String> res=getperm(s);
+       System.out.println(res);
        permute(s, 0, s.length()-1);
        System.out.println(set);
 

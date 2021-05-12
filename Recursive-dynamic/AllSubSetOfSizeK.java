@@ -3,7 +3,7 @@ import java.util.*;
 public class AllSubSetOfSizeK {
 	static int min=Integer.MAX_VALUE;
 	public void subset(int[] A, int k, int start, int currLen, boolean[] used,List<List<Integer>> subsets) {
-        List<Integer> curr=new LinkedList<>();
+        List<Integer> curr=new LinkedList<Integer>();
 		if (currLen == k) {
 			for (int i = 0; i < A.length; i++) {
 				if (used[i] == true) {
@@ -34,6 +34,7 @@ public class AllSubSetOfSizeK {
 		boolean[] B = new boolean[A.length];
 		AllSubSetOfSizeK i = new AllSubSetOfSizeK();
 		i.subset(A, 3, 0, 0, B,subsets);
+		System.out.println(subsets);
 
 	}
 

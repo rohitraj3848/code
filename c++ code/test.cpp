@@ -1,41 +1,42 @@
 #include <iostream>
 using namespace std;
-class person
-{
-    char name[30];
-    int age;
 
-public:
-    void getdata(void)
-    {
-        cout << "enter name" << endl;
-        cin >> name;
-        cout << "enter age" << endl;
-        cin >> age;
-    }
-    void display(void)
-    {
-        cout << "name : " << name << endl;
-        cout << "age : " << age << endl;
-    }
-};
-/*void person ::getdata(void)
-{
-    cout << "enter name" << endl;
-    cin >> name;
-    cout << "enter age" << endl;
-    cin >> age;
-}
-void person :: display(void)
-{
-    cout << "name : " << name << endl;
-    cout <<"age :" << age << endl;
-}
-*/
 int main()
 {
-    person p;
-    p.getdata();
-    p.display();
-    return (0);
+    int n, capacity,i;
+   cin >> n >> capacity;
+   for(i=0;i<n;i++) {
+      string command;
+      cin >> command;
+      if(command == "get") {
+         int key;
+         cin >> key;
+         cout << key << endl;
+      } 
+      else if(command == "set") {
+         int key, value;
+         cin >> key >> value;
+         cout << key << value;
+      }
+   }
+   return 0;
 }
+/*
+    8 4
+
+    set 4 2
+
+    set 2 7
+
+    get 2
+
+    set 1 8
+
+    set 5 9
+
+    set 6 15
+
+    get 4
+
+    get 5
+*/

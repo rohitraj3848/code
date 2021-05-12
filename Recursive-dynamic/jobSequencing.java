@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class jobSequencing {
     public static void main(String[] args) {
         List<Job> jobs = Arrays.asList(
@@ -35,6 +36,7 @@ public class jobSequencing {
         System.out.println(Arrays.toString(maxprofit));
         System.out.println(max);
     }
+
     static int maxProfit(List<Job> jobs,int n){
         if(n<0){
             return 0;
