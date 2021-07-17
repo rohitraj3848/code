@@ -3,23 +3,9 @@ using namespace std;
 
 int main()
 {
-    int n, capacity,i;
-   cin >> n >> capacity;
-   for(i=0;i<n;i++) {
-      string command;
-      cin >> command;
-      if(command == "get") {
-         int key;
-         cin >> key;
-         cout << key << endl;
-      } 
-      else if(command == "set") {
-         int key, value;
-         cin >> key >> value;
-         cout << key << value;
-      }
-   }
-   return 0;
+    int number[] = { 2, 3 ,4,5 ,8};
+    int n = sizeof(number) / sizeof(number[0]);
+    cout << n << endl;
 }
 /*
     8 4

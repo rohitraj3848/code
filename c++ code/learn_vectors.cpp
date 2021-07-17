@@ -133,6 +133,8 @@ int main()
 
 	cout << "\nThe first element is: " << v[0];
 
+    }
+};
 	// removes the first element
 	v.erase(v.begin());
 
