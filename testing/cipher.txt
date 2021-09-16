@@ -1,0 +1,31 @@
+CTRBLK := NONCE || IV || ONE
+      FOR i := 1 to n-1 DO
+        CT[i] := PT[i] XOR AES(CTRBLK)
+        CTRBLK := CTRBLK + 1
+      END
+      CT[n] := PT[n] XOR TRUNC(AES(CTRBLK))
+
+
+
+       +-----+     +-----+     +-----+     +-----+     +-----+     +---+----+
+ | M_1 |     | M_2 |     | M_n |     | M_1 |     | M_2 |     |M_n|10^i|
+ +-----+     +-----+     +-----+     +-----+     +-----+     +---+----+
+    |           |           |   +--+    |           |           |   +--+
+    |     +--->(+)    +--->(+)<-|K1|    |     +--->(+)    +--->(+)<-|K2|
+    |     |     |     |     |   +--+    |     |     |     |     |   +--+
+ +-----+  |  +-----+  |  +-----+     +-----+  |  +-----+  |  +-----+
+ |AES_K|  |  |AES_K|  |  |AES_K|     |AES_K|  |  |AES_K|  |  |AES_K|
+ +-----+  |  +-----+  |  +-----+     +-----+  |  +-----+  |  +-----+
+    |     |     |     |     |           |     |     |     |     |
+    +-----+     +-----+     |           +-----+     +-----+     |
+                            |                                   |
+                         +-----+                              +-----+
+                         |  T  |                              |  T  |
+                         +-----+                              +-----+
+
+             (a) positive multiple block length         (b) otherwise
+
+          Figure 2.1.  Illustration of the two cases of AES-CMAC
+
+
+GIT TOKEN - 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
