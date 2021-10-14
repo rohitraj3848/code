@@ -12,18 +12,22 @@ public:
     MyClass(int val);
     static void showList();
 };
+
 list<MyClass *> MyClass::instances_;
+
 MyClass::MyClass(int val)
 {
     instances_.push_back(this);
     value_ = val;
 }
+
 MyClass::~MyClass()
 {
     list<MyClass *>::iterator p = find(instances_.begin(), instances_.end(), this);
     if (p != instances_.end())
         instances_.erase(p);
 }
+
 void MyClass::showList()
 {
     for (list<MyClass *>::iterator p = instances_.begin();

@@ -52,7 +52,7 @@ typedef struct
 DLIST attached_ue_list;
 static int num_ue = 0;
 
-void add_to_list(unsigned long long id, unsigned char* suci)
+void add_ue_to_list(unsigned long long id, unsigned char* suci)
 {
 
         gnb_ue_ctx_t* mynode = malloc(sizeof(gnb_ue_ctx_t));
@@ -69,9 +69,8 @@ void add_to_list(unsigned long long id, unsigned char* suci)
 
 }
 
- 
 
-void display_list()
+void display_ue_list()
 {
         NODE* scan;
         gnb_ue_ctx_t* mynode;
@@ -92,7 +91,7 @@ void display_list()
 
  
 
-void delete_from_list(unsigned long long id)
+void delete_ue_from_list(unsigned long long id)
 {
         NODE* scan;
         gnb_ue_ctx_t* mynode;
@@ -124,16 +123,16 @@ int main()
         unsigned long long id4 = 56;
         unsigned char suci4[] = "7843000";
 
-        add_to_list(id1, suci1);
-        add_to_list(id2, suci2);
-        add_to_list(id3, suci3);
-        add_to_list(id4, suci4);
+        add_ue_to_list(id1, suci1);
+        add_ue_to_list(id2, suci2);
+        add_ue_to_list(id3, suci3);
+        add_ue_to_list(id4, suci4);
 
-        display_list();
+        display_ue_list();
         printf("%s\n", "after deleting ue[3]");
-        delete_from_list(45);
+        delete_ue_from_list(45);
 
-        display_list();
+        display_ue_list();
 
         return 0;
 }

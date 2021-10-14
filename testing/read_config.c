@@ -3,6 +3,23 @@
 #include <stdlib.h>
 
 
+typedef struct
+{
+    int num_ia;
+    char** ia;
+    int num_ea;
+    char** ea;
+    unsigned char   amf_region_id;
+    unsigned short  amf_set_id;
+    unsigned char   amf_pointer;
+    char   amf_instance_id[256];
+
+    char   amf_api_root[256];
+    char        amf_http_ip[128];
+    unsigned short     amf_http_port;
+
+}amf_config_t;
+
 void trim(char *buffer)
 {
     int i;
@@ -186,92 +203,114 @@ void amf_config_load_amf_ids()
 
 }
 
+void amf_config_load_ea()
+{
+        char rval[AMF_MAX_BUF_LEN];
+
+    
+        fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "EA", rval);
+    if(strcmp(rval, "") == 0)
+    {
+        g_amf_main.config.ea = realloc(g_amf_main.config.ea, sizeof(char*)*(g_amf_main.config.num_ea+1));
+        if(g_amf_main.config.ea == NULL)
+        {
+            fprintf(stderr, "panic: could not allocate memory at file: %s line: %d\n", __FILE__, __LINE__);
+            exit(1);
+        }
+        g_amf_main.config.ea[g_amf_main.config.num_ea] = malloc(16);
+        if(g_amf_main.config.ea[g_amf_main.config.num_ea] == NULL)
+        {
+            fprintf(stderr, "panic: could not allocate memory at file: %s line: %d\n", __FILE__, __LINE__);
+            exit(1);
+        }
+        strcpy(g_amf_main.config.ea[g_amf_main.config.num_ea], "EA0");
+        g_amf_main.config.num_ea += 1;
+        return;
+    }
+
+    char* tok;
+    tok = strtok(rval, ",");
+    while(tok != NULL)
+    {
+        g_amf_main.config.ea = realloc(g_amf_main.config.ea, sizeof(char*)*(g_amf_main.config.num_ea+1));
+        if(g_amf_main.config.ea == NULL)
+        {
+            fprintf(stderr, "panic: could not allocate memory at file: %s line: %d\n", __FILE__, __LINE__);
+            exit(1);
+        }
+        g_amf_main.config.ea[g_amf_main.config.num_ea] = malloc(16);
+        if(g_amf_main.config.ea[g_amf_main.config.num_ea] == NULL)
+        {
+            fprintf(stderr, "panic: could not allocate memory at file: %s line: %d\n", __FILE__, __LINE__);
+            exit(1);
+        }
+        strcpy(g_amf_main.config.ea[g_amf_main.config.num_ea], tok);
+        g_amf_main.config.num_ea += 1;
+    }
+}
+
+void amf_config_load_ia()
+{
+
+        char rval[AMF_MAX_BUF_LEN];
+
+    
+        fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "IA", rval);
+    if(strcmp(rval, "") == 0)
+    {
+        g_amf_main.config.ia = realloc(g_amf_main.config.ia, sizeof(char*)*(g_amf_main.config.num_ia+1));
+        if(g_amf_main.config.ia == NULL)
+        {
+            fprintf(stderr, "panic: could not allocate memory at file: %s line: %d\n", __FILE__, __LINE__);
+            exit(1);
+        }
+        g_amf_main.config.ia[g_amf_main.config.num_ia] = malloc(16);
+        if(g_amf_main.config.ia[g_amf_main.config.num_ia] == NULL)
+        {
+            fprintf(stderr, "panic: could not allocate memory at file: %s line: %d\n", __FILE__, __LINE__);
+            exit(1);
+        }
+        strcpy(g_amf_main.config.ia[g_amf_main.config.num_ia], "IA0");
+        g_amf_main.config.num_ia += 1;
+        return;
+    }
+
+    char* tok;
+    tok = strtok(rval, ",");
+    while(tok != NULL)
+    {
+        g_amf_main.config.ia = realloc(g_amf_main.config.ia, sizeof(char*)*(g_amf_main.config.num_ia+1));
+        if(g_amf_main.config.ia == NULL)
+        {
+            fprintf(stderr, "panic: could not allocate memory at file: %s line: %d\n", __FILE__, __LINE__);
+            exit(1);
+        }
+        g_amf_main.config.ia[g_amf_main.config.num_ia] = malloc(16);
+        if(g_amf_main.config.ia[g_amf_main.config.num_ia] == NULL)
+        {
+            fprintf(stderr, "panic: could not allocate memory at file: %s line: %d\n", __FILE__, __LINE__);
+            exit(1);
+        }
+        strcpy(g_amf_main.config.ia[g_amf_main.config.num_ia], tok);
+        g_amf_main.config.num_ia += 1;
+    }
+}
+
 void amf_read_cfg()
 {
     char rval[AMF_MAX_BUF_LEN];
 
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "MANAGEMENT_IP", rval);
-    strcpy(g_amf_main.config.management_ip, rval);
+    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "AMF_API_ROOT", rval);
+    strcpy(g_amf_main.config.amf_api_root, rval);
+
+    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "AMF_HTTP_IP", rval);
+    strcpy(g_amf_main.config.amf_http_ip, rval);
+
+    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "AMF_HTTP_PORT", rval);
+    g_amf_main.config.amf_http_port = atoi(rval);
     
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "MANAGEMENT_IP6", rval);
-    strcpy(g_amf_main.config.management_ip6, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "ACCESS_IP", rval);
-    strcpy(g_amf_main.config.access_ip, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "ACCESS_IP6", rval);
-    strcpy(g_amf_main.config.access_ip6, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "SERVING_NETWORK", rval);
-    strcpy(g_amf_main.config.serving_network, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "AUSF_API_ROOT", rval);
-    strcpy(g_amf_main.config.ausf_api_root, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "AUSF_IP", rval);
-    strcpy(g_amf_main.config.ausf_ip, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "AUSF_PORT", rval);
-    g_amf_main.config.ausf_port = atoi(rval);
-
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "UDM_API_ROOT", rval);
-    strcpy(g_amf_main.config.udm_api_root, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "UDM_IP", rval);
-    strcpy(g_amf_main.config.udm_ip, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "UDM_PORT", rval);
-    g_amf_main.config.udm_port = atoi(rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "EIR_PRESENT", rval);
-    g_amf_main.config.eir_present = atoi(rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "EIR_API_ROOT", rval);
-    strcpy(g_amf_main.config.eir_api_root, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "EIR_IP", rval);
-    strcpy(g_amf_main.config.eir_ip, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "EIR_PORT", rval);
-    g_amf_main.config.eir_port = atoi(rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "SMF_API_ROOT", rval);
-    strcpy(g_amf_main.config.smf_api_root, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "SMF_IP", rval);
-    strcpy(g_amf_main.config.smf_api_root, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "SMF_PORT", rval);
-    g_amf_main.config.smf_port = atoi(rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "PCF_PRESENT", rval);
-    g_amf_main.config.pcf_present = atoi(rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "PCF_API_ROOT", rval);
-    strcpy(g_amf_main.config.pcf_api_root, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "PCF_IP", rval);
-    strcpy(g_amf_main.config.pcf_ip, rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "PCF_PORT", rval);
-    g_amf_main.config.pcf_port = atoi(rval);
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "ACCESS_PORT", rval);
-    if(strcmp(rval, "") != 0)
-    {
-        g_amf_main.config.access_port = atoi(rval);
-    }
-    else
-    {
-        g_amf_main.config.access_port = AMF_ACCESS_PORT;
-    }
 }
 int main()
 {
-    char rval[AMF_MAX_BUF_LEN];
-
-    fileGetString(AMF_CFG_FILE, "AMF_CFG", '=', "MANAGEMENT_IP", rval);
     printf("%s\n", rval);
 }

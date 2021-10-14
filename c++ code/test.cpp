@@ -1,28 +1,39 @@
 #include <iostream>
 using namespace std;
 
+class item
+{
+    int number;
+    float cost;
+    public :
+        void getdata(int a, float b);
+        void putdata(void)
+        {
+             cout << "number : " << number << endl;
+             cout << "cost : "<< cost << "\n";
+        }
+};
+
+void item :: getdata(int a, float b)
+{
+    number = a;
+    cost = b;
+}
+
+
+void swap(int a, int b, int c=11)
+{
+    cout << a+b+c << endl;
+}
 int main()
 {
-    int number[] = { 2, 3 ,4,5 ,8};
-    int n = sizeof(number) / sizeof(number[0]);
-    cout << n << endl;
+    item x;
+    x.getdata(10,299.93);
+    x.putdata();
+
+    item y;
+    y.getdata(500, 45.53);
+    y.putdata();
+
+    return 0;
 }
-/*
-    8 4
-
-    set 4 2
-
-    set 2 7
-
-    get 2
-
-    set 1 8
-
-    set 5 9
-
-    set 6 15
-
-    get 4
-
-    get 5
-*/
